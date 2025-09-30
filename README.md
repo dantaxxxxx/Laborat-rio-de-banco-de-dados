@@ -57,10 +57,10 @@ Para recriar e utilizar este banco de dados em seu ambiente local, siga os passo
 ## 📊 Diagramas do Modelo
 
 **Diagrama Conceitual**
-_![Diagrama Conceitual](3273f9de-6cb3-477d-923e-ea3e06636d2b.jpg)_
+_![Diagrama Conceitual](Diagrama%201.jpg)_
 
 **Diagrama Físico**
-_![Diagrama Físico](1ed12315-7342-48c7-afc5-76a99a77bd51.jpg)_
+_![Diagrama Físico](Diagrama%202.jpg)_
 
 
 ## 👨‍💻 Autor
