@@ -1,17 +1,20 @@
 -- =====================================================================
--- Script SQL Completo - Sistema de Encomendas
--- Autores:Rodrigp Castro e Grupo  
--- Data de Criação: 29 de Setembro de 2025
+-- Script SQL do Projeto de LBD - Sistema de Encomendas
+--
+-- Grupo:
+-- Rodrigo Castro, Luis Gustavo Elias, Marcos Miguel, Lucas Patrick e Lucca Seib
+--
+-- Data de Entrega: 01 de Outubro de 2025
 -- Dialeto: MySQL
 -- =====================================================================
 
+
 -- =====================================================================
--- SEÇÃO 1: CRIAÇÃO DAS TABELAS (DDL - Data Definition Language)
--- Criação da estrutura do banco de dados conforme o diagrama físico.
+-- PARTE 1: CRIANDO AS TABELAS (DDL)
+-- Aqui a gente cria a estrutura do banco, seguindo o diagrama físico.
 -- =====================================================================
 
--- Tabela: CLIENTE
--- Armazena os dados dos clientes.
+-- Tabela dos Clientes
 CREATE TABLE CLIENTE (
     ID_Cliente INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     CPF VARCHAR(14) UNIQUE NOT NULL,
@@ -21,8 +24,7 @@ CREATE TABLE CLIENTE (
     Endereco VARCHAR(255) NOT NULL
 );
 
--- Tabela: FUNCIONARIO
--- Armazena os dados dos funcionários.
+-- Tabela dos Funcionários
 CREATE TABLE FUNCIONARIO (
     ID_Funcionario INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     Nome VARCHAR(150) NOT NULL,
@@ -30,16 +32,14 @@ CREATE TABLE FUNCIONARIO (
     `E-mail` VARCHAR(100) UNIQUE NOT NULL
 );
 
--- Tabela: PRODUTO
--- Armazena os dados dos produtos.
+-- Tabela dos Produtos
 CREATE TABLE PRODUTO (
     ID_Produto INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     Nome_Produto VARCHAR(100) UNIQUE NOT NULL,
     Preco_Venda DECIMAL(10, 2) NOT NULL
 );
 
--- Tabela: ENCOMENDA
--- Tabela central que relaciona clientes, funcionários e produtos em uma encomenda.
+-- Tabela principal, a de Encomendas
 CREATE TABLE ENCOMENDA (
     ID_Encomenda INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     Data_Pedido DATE NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE ENCOMENDA (
     id_funcionario INT UNSIGNED,
     id_produto INT UNSIGNED,
 
-    -- Definição das chaves estrangeiras (Foreign Keys)
+    -- Ligando tudo com as chaves estrangeiras (Foreign Keys)
     CONSTRAINT fk_encomenda_cliente FOREIGN KEY (id_cliente) REFERENCES CLIENTE(ID_Cliente),
     CONSTRAINT fk_encomenda_funcionario FOREIGN KEY (id_funcionario) REFERENCES FUNCIONARIO(ID_Funcionario),
     CONSTRAINT fk_encomenda_produto FOREIGN KEY (id_produto) REFERENCES PRODUTO(ID_Produto)
@@ -58,30 +58,31 @@ CREATE TABLE ENCOMENDA (
 
 
 -- =====================================================================
--- SEÇÃO 2: INSERÇÃO DE DADOS (DML - Data Manipulation Language)
--- População das tabelas com dados de exemplo para testes e consultas.
+-- PARTE 2: INSERINDO DADOS DE EXEMPLO (DML)
+-- Agora vamos colocar alguns dados nas tabelas para não ficarem vazias
+-- e a gente poder testar as consultas.
 -- =====================================================================
 
--- Inserindo dados na tabela CLIENTE
+-- Adicionando 3 clientes
 INSERT INTO CLIENTE (CPF, Nome, `E-mail`, Telefone, Endereco) VALUES
 ('111.222.333-44', 'Ana Beatriz Costa', 'ana.costa@email.com', '(11) 98765-4321', 'Rua das Flores, 123, São Paulo - SP'),
 ('555.666.777-88', 'Ricardo Almeida', 'ricardo.a@email.com', '(21) 91234-5678', 'Avenida Central, 456, Rio de Janeiro - RJ'),
 ('999.888.777-66', 'Carla Mendes', 'carla.mendes@email.com', '(31) 95555-4444', 'Praça da Liberdade, 789, Belo Horizonte - MG');
 
--- Inserindo dados na tabela FUNCIONARIO
+-- Adicionando 2 funcionários
 INSERT INTO FUNCIONARIO (Nome, Cargo, `E-mail`) VALUES
 ('João Silva', 'Vendedor', 'joao.silva@empresa.com'),
 ('Mariana Oliveira', 'Gerente de Vendas', 'mariana.o@empresa.com');
 
--- Inserindo dados na tabela PRODUTO
+-- Cadastrando 4 produtos
 INSERT INTO PRODUTO (Nome_Produto, Preco_Venda) VALUES
 ('Teclado Mecânico RGB', 350.00),
 ('Mouse Gamer Sem Fio', 180.50),
 ('Monitor Ultrawide 29"', 1250.00),
 ('Headset Gamer 7.1', 280.75);
 
--- Inserindo dados na tabela ENCOMENDA
--- Note que o Valor_Total corresponde ao Preco_Venda do produto, conforme o modelo.
+-- Registrando algumas encomendas
+-- O Valor_Total aqui é o mesmo preço do produto, como o modelo pedia.
 INSERT INTO ENCOMENDA (Data_Pedido, Data_Entrega_Prevista, Status_Encomenda, Valor_Total, id_cliente, id_funcionario, id_produto) VALUES
 -- Ana (ID 1) comprou um Teclado (ID 1) com o vendedor João (ID 1)
 ('2025-09-20', '2025-09-30', 'Enviado', 350.00, 1, 1, 1),
@@ -94,18 +95,17 @@ INSERT INTO ENCOMENDA (Data_Pedido, Data_Entrega_Prevista, Status_Encomenda, Val
 
 
 -- =====================================================================
--- SEÇÃO 3: SCRIPTS DE CONSULTA (SELECT)
--- Exemplos de consultas para extrair informações do banco de dados.
+-- PARTE 3: NOSSAS CONSULTAS (SELECTS)
+-- Alguns exemplos de SELECTs que montamos pra mostrar o banco funcionando.
 -- =====================================================================
 
--- Consulta 1: Listar todos os produtos e seus preços
+-- Consulta 1: Ver todos os produtos, do mais caro para o mais barato.
 SELECT Nome_Produto, Preco_Venda FROM PRODUTO ORDER BY Preco_Venda DESC;
 
--- Consulta 2: Encontrar todas as encomendas com status 'Pendente'
+-- Consulta 2: Achar todas as encomendas que ainda estão 'Pendentes'.
 SELECT * FROM ENCOMENDA WHERE Status_Encomenda = 'Pendente';
 
--- Consulta 3: Consulta complexa (JOIN) para exibir um relatório de encomendas
--- Mostra o nome do cliente, do funcionário e do produto para cada encomenda.
+-- Consulta 3: O relatório principal! Junta tudo pra mostrar os detalhes de cada encomenda.
 SELECT
     E.ID_Encomenda,
     E.Data_Pedido,
@@ -125,8 +125,8 @@ JOIN
 ORDER BY
     E.Data_Pedido;
 
--- Consulta 4: Consulta com agregação (COUNT e GROUP BY)
--- Contar quantas encomendas cada cliente já fez.
+-- Consulta 4: Contando quantas encomendas cada cliente já fez.
+-- Usamos LEFT JOIN pra mostrar até os clientes que ainda não compraram nada (se existissem).
 SELECT
     C.Nome,
     COUNT(E.ID_Encomenda) AS Total_de_Encomendas
@@ -139,8 +139,7 @@ GROUP BY
 ORDER BY
     Total_de_Encomendas DESC;
 
--- Consulta 5: Consulta com agregação (SUM e GROUP BY)
--- Calcular o valor total vendido por cada funcionário.
+-- Consulta 5: Ver quanto cada funcionário já vendeu no total.
 SELECT
     F.Nome,
     F.Cargo,
@@ -156,24 +155,22 @@ ORDER BY
 
 
 -- =====================================================================
--- SEÇÃO 4: SCRIPTS DE ATUALIZAÇÃO (UPDATE)
--- Exemplos de como modificar dados existentes nas tabelas.
+-- PARTE 4: ATUALIZANDO DADOS (UPDATES)
+-- Dois exemplos de como usar o UPDATE pra modificar os dados.
 -- =====================================================================
 
--- Update 1: Atualizar o status de uma encomenda para 'Entregue'
--- Supondo que a encomenda 1 foi entregue com sucesso.
+-- Update 1: Mudando o status da primeira encomenda para 'Entregue'.
 UPDATE ENCOMENDA
 SET Status_Encomenda = 'Entregue'
 WHERE ID_Encomenda = 1;
 
--- Verificando a alteração
+-- Conferindo se a alteração funcionou
 SELECT * FROM ENCOMENDA WHERE ID_Encomenda = 1;
 
--- Update 2: Aplicar um aumento de 10% no preço de todos os produtos da categoria 'Gamer'
--- (Neste caso, aplicaremos a produtos que contenham 'Gamer' no nome)
+-- Update 2: Dando um aumento de 10% nos produtos que têm 'Gamer' no nome.
 UPDATE PRODUTO
 SET Preco_Venda = Preco_Venda * 1.10
 WHERE Nome_Produto LIKE '%Gamer%';
 
--- Verificando a alteração nos preços
+-- Conferindo se os preços aumentaram mesmo.
 SELECT Nome_Produto, Preco_Venda FROM PRODUTO WHERE Nome_Produto LIKE '%Gamer%';
