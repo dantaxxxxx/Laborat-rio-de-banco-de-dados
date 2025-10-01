@@ -1,60 +1,61 @@
 # Projeto de Banco de Dados: Sistema de Encomendas
 
-## 📜 Descrição
+## 📜 Nosso Projeto
 
-Este repositório contém os scripts SQL para a criação e população de um banco de dados relacional para um sistema simplificado de gerenciamento de encomendas para o trabalho de LBD. O projeto foi desenvolvido com base em diagramas de entidade-relacionamento (DER) e físico, modelando as interações entre Clientes, Funcionários, Produtos e as Encomendas realizadas.
+Olá! Este repositório foi criado para o nosso trabalho da disciplina de Laboratório de Banco de Dados (LBD).
 
-O objetivo é demonstrar a implementação de um schema de banco de dados, incluindo a definição de tabelas, chaves primárias, chaves estrangeiras, e a manipulação de dados com exemplos práticos.
+O objetivo era criar um sistema simples de gerenciamento de encomendas. Para isso, primeiro modelamos as interações entre Clientes, Funcionários, Produtos e Encomendas usando os diagramas que estão no repositório. Depois, escrevemos todos os scripts SQL necessários para criar o banco de dados, inserir dados e fazer consultas.
 
-## ✨ Funcionalidades
+## ✨ O que o script faz?
 
--   **Schema de Banco de Dados:** Estrutura completa com 4 tabelas (`CLIENTE`, `FUNCIONARIO`, `PRODUTO`, `ENCOMENDA`) e seus respectivos relacionamentos.
--   **Scripts de População:** Dados de exemplo para todas as tabelas, permitindo a execução de consultas realistas.
--   **Exemplos de Consultas (`SELECT`):** Scripts para extrair informações úteis, como relatórios de encomendas, vendas por funcionário e total de compras por cliente.
--   **Exemplos de Atualização (`UPDATE`):** Scripts que demonstram como modificar registros existentes no banco de dados.
+Nosso arquivo principal, o `schema_completo.sql`, já inclui tudo o que é preciso para rodar o projeto:
 
-## 🛠️ Tecnologias Utilizadas
+-   **Criação das Tabelas:** Monta toda a estrutura do zero, com as 4 tabelas (`CLIENTE`, `FUNCIONARIO`, `PRODUTO`, `ENCOMENDA`) e seus relacionamentos.
+-   **População do Banco:** Insere vários dados de exemplo para que as tabelas não fiquem vazias e seja possível testar as consultas.
+-   **Consultas de Exemplo:** Deixamos vários exemplos de `SELECT` para mostrar como extrair informações, como relatórios de vendas e compras por cliente.
+-   **Atualizações de Exemplo:** Incluímos também alguns comandos `UPDATE` para mostrar como modificar os dados.
 
--   **Linguagem:** SQL (Structured Query Language)
--   **SGBD (Dialeto):** MySQL
+## 🛠️ Ferramentas que Usamos
 
-## 📂 Estrutura do Repositório
+-   **Linguagem:** SQL
+-   **Banco de Dados:** MySQL
 
-O repositório contém um único arquivo principal:
+## 📂 Organização
 
--   `📄 schema_completo.sql`: Este arquivo autocontido inclui:
-    1.  **DDL (Data Definition Language):** Comandos `CREATE TABLE` para gerar toda a estrutura.
-    2.  **DML (Data Manipulation Language):** Comandos `INSERT INTO` para popular o banco.
-    3.  **DQL (Data Query Language):** Exemplos de `SELECT` com diferentes níveis de complexidade.
-    4.  **DML (Data Manipulation Language):** Exemplos de `UPDATE` para modificar os dados.
+Para facilitar a correção, colocamos todo o nosso código em um único arquivo:
 
-## 🚀 Como Utilizar
+-   `📄 schema_completo.sql`: Dentro dele, o código está dividido em seções para cada etapa (criação, inserção, consultas e atualizações).
 
-Para recriar e utilizar este banco de dados em seu ambiente local, siga os passos abaixo:
+## 🚀 Como Executar o Projeto
 
-1.  **Pré-requisitos:**
-    -   Ter um servidor de banco de dados MySQL (ou compatível, como MariaDB) instalado. Você pode usar ferramentas como XAMPP, WAMP, Docker, ou uma instalação nativa.
-    -   Ter um cliente de banco de dados, como MySQL Workbench, DBeaver, ou acesso à linha de comando (CLI).
+Para testar nosso banco de dados na sua máquina, é só seguir estes passos:
 
-2.  **Crie um Banco de Dados:**
-    Execute o seguinte comando no seu cliente de banco de dados:
+1.  **O que precisa ter:**
+    -   Um servidor MySQL ou MariaDB instalado (pode ser via XAMPP, Docker, etc.).
+    -   Um programa para gerenciar o banco, como MySQL Workbench ou DBeaver.
+
+2.  **Crie o banco de dados:**
+    Primeiro, rode este comando para criar o database:
     ```sql
     CREATE DATABASE sistema_encomendas CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
     ```
 
-3.  **Selecione o Banco de Dados:**
+3.  **Selecione o banco de dados:**
     ```sql
     USE sistema_encomendas;
     ```
 
-4.  **Execute o Script:**
-    -   **Opção A (Cliente Gráfico):** Copie todo o conteúdo do arquivo `schema_completo.sql` e cole na janela de consulta do seu cliente (MySQL Workbench, DBeaver, etc.). Em seguida, execute o script.
-    -   **Opção B (Linha de Comando):** Salve o arquivo `schema_completo.sql` em seu computador e execute o seguinte comando no seu terminal, substituindo `seu_usuario` pelo seu usuário do MySQL:
+4.  **Execute nosso script:**
+    -   **Jeito fácil:** Abra o arquivo `schema_completo.sql`, copie todo o conteúdo, cole no seu programa de banco de dados e mande executar.
+    -   **Pelo terminal:** Se preferir, salve o arquivo no seu PC e rode o comando abaixo (lembre de trocar `seu_usuario`):
         ```bash
         mysql -u seu_usuario -p sistema_encomendas < schema_completo.sql
         ```
+    E pronto! O banco de dados estará criado e com todos os dados de exemplo.
 
 ## 📊 Diagramas do Modelo
+
+Abaixo estão os diagramas que usamos como base para criar o banco de dados.
 
 **Diagrama Conceitual**
 _![Diagrama Conceitual](Diagrama%201.jpg)_
@@ -63,6 +64,10 @@ _![Diagrama Conceitual](Diagrama%201.jpg)_
 _![Diagrama Físico](Diagrama%202.jpg)_
 
 
-## 👨‍💻 Autor
+## 👨‍💻 Membros do Grupo
 
-Este projeto foi implementado por **[Rodrigo Castro, Luis Gustavo Elias, Marcos Miguel, Lucas Patrick e Lucca Seib]**.
+-   Rodrigo Castro
+-   Luis Gustavo Elias
+-   Marcos Miguel
+-   Lucas Patrick
+-   Lucca Seib
