@@ -4,7 +4,7 @@
 
 Olá! Este repositório foi criado para o nosso trabalho da disciplina de Laboratório de Banco de Dados (LBD).
 
-O objetivo era criar um sistema simples de gerenciamento de encomendas. Para isso, primeiro modelamos as interações entre Clientes, Funcionários, Produtos e Encomendas usando os diagramas que estão no repositório. Depois, escrevemos todos os scripts SQL necessários para criar o banco de dados, inserir dados e fazer consultas.
+O objetivo era criar um sistema simples doceria de loja física única. Para isso, primeiro modelamos as interações entre Clientes, Funcionários, Produtos e Encomendas usando os diagramas que estão no repositório. Depois, escrevemos todos os scripts SQL necessários para criar o banco de dados, inserir dados e fazer consultas.
 
 ## ✨ O que o script faz?
 
